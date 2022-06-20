@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface PetRepository extends JpaRepository<Pet, Long> {
     List<Pet> getAllPetByCustomerId(Long id);
-
-    Pet getPetbyId(Long petId);
 }

@@ -5,12 +5,14 @@ import com.udacity.jdnd.course3.critter.pet.PetType;
 import javax.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 
 public class Pet  {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private PetType petType;
@@ -25,6 +27,8 @@ public class Pet  {
     @JoinColumn(name = "customerId")
     private Customer customer;
 
+    @ManyToMany(mappedBy = "listPet")
+    private List<Schedule> listSchedule= new ArrayList<>();
 
 
     //Contructor -- Getter/Setter
@@ -87,5 +91,16 @@ public class Pet  {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+
+    //new from here
+
+    public List<Schedule> getListSchedule() {
+        return listSchedule;
+    }
+
+    public void setListSchedule(List<Schedule> listSchedule) {
+        this.listSchedule = listSchedule;
     }
 }

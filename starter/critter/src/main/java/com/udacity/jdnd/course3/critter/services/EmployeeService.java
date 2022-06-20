@@ -10,6 +10,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -35,5 +36,9 @@ public class EmployeeService {
         List<Employee> listEmp = employeeRepository.findAll();
         listEmp.stream().filter(emp -> emp.getListSkills().containsAll(skills));
         return listEmp;
+
+
     }
+
+
 }

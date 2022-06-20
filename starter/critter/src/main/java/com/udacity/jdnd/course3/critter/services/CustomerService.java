@@ -35,17 +35,17 @@ public class CustomerService {
 
     public Customer saveCustomer(Customer customer, List<Long> listPetIds){
         List<Pet> listPet = new ArrayList<>();
-        customer.getListPets().clear();
+        //customer.getListPets().clear();
 
         // #1 use for each
-
+        if( listPetIds != null ){
         for (Long petId: listPetIds ) {
-            Pet pet = petRepository.getPetbyId(petId);
+            Pet pet = petRepository.getOne(petId);
             if(petRepository.existsById(pet.getId())){
                 listPet.add(pet);
             }else{
                 throw  new NotFoundException("Cannot found Pet");
-            }
+            }}
         }
 
 //         #2 use map(element -> ()) method

@@ -5,13 +5,15 @@ import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import javax.persistence.*;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 
 public class Employee{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -22,6 +24,17 @@ public class Employee{
     @ElementCollection
     private Set<DayOfWeek> listDayOfWeek;
 
+    @ManyToMany(mappedBy = "listEmp")
+    private List<Schedule> listSchedule = new ArrayList<>();
+
+    // new from here
+    public List<Schedule> getListSchedule() {
+        return listSchedule;
+    }
+
+    public void setListSchedule(List<Schedule> listSchedule) {
+        this.listSchedule = listSchedule;
+    }
     //Contructor -- Getter/Setter
 
     public Employee() {
