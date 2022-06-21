@@ -11,6 +11,7 @@ import com.udacity.jdnd.course3.critter.repositories.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,8 +47,17 @@ public class ScheduleService {
         return pet.getListSchedule();
     }
 
-    public List<Schedule> getScheduleByEmployee(Employee emp) {
-        return emp.getListSchedule();
+    public List<Schedule> getScheduleByEmployeeId(Long empId) {
+        //return emp.getListSchedule();
+        List<Schedule> listSchedule = scheduleRepository.findAll();
+        List<Schedule> listScheduleByEmp = new ArrayList<>();
+
+//        for (Schedule s: listSchedule) {
+//            if(s.getListEmp().stream().filter(employee -> employee.getId().longValue() == empId).collect(Collectors.toList())){
+//                listScheduleByEmp.add(s);
+//            }//
+//        }
+        return listSchedule.stream().filter(emp-> emp.getId().longValue() == empId).collect(Collectors.toList());
     }
 
      public List<Schedule> getScheduleByCustomer(Customer customer) {
