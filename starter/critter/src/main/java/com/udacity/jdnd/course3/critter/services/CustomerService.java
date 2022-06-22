@@ -8,10 +8,12 @@ import com.udacity.jdnd.course3.critter.repositories.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class CustomerService {
 
@@ -33,6 +35,7 @@ public class CustomerService {
         return petRepository.getOne(id).getCustomer();
     }
 
+    @Transactional
     public Customer saveCustomer(Customer customer, List<Long> listPetIds){
         List<Pet> listPet = new ArrayList<>();
         //customer.getListPets().clear();

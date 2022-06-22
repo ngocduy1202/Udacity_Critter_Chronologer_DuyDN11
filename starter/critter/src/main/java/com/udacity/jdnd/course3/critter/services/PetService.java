@@ -7,8 +7,10 @@ import com.udacity.jdnd.course3.critter.repositories.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 @Service
 public class PetService {
 
@@ -30,6 +32,7 @@ public class PetService {
         return petRepository.getOne(petId);
     }
 
+    @Transactional
     public Pet savePet(Pet pet, Long customerId){
         Customer customer = customerRepository.getOne(customerId);
         pet.setCustomer(customer);

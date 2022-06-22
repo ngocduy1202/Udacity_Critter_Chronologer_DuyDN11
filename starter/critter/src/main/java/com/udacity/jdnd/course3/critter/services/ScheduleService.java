@@ -11,11 +11,13 @@ import com.udacity.jdnd.course3.critter.repositories.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class ScheduleService {
 
@@ -35,6 +37,7 @@ public class ScheduleService {
         return scheduleRepository.findAll();
     }
 
+    @Transactional
     public Schedule addSchedule(Schedule schedule, List<Long> empId, List<Long> petId){
         List<Employee> listEmp = employeeRepository.findAllById(empId);
         List<Pet> listPet = petRepository.findAllById(petId);
