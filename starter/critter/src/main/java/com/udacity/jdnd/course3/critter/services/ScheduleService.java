@@ -47,18 +47,10 @@ public class ScheduleService {
         return pet.getListSchedule();
     }
 
-    public List<Schedule> getScheduleByEmployeeId(Long empId) {
-        //return emp.getListSchedule();
-        List<Schedule> listSchedule = scheduleRepository.findAll();
-        List<Schedule> listScheduleByEmp = new ArrayList<>();
-
-//        for (Schedule s: listSchedule) {
-//            if(s.getListEmp().stream().filter(employee -> employee.getId().longValue() == empId).collect(Collectors.toList())){
-//                listScheduleByEmp.add(s);
-//            }//
-//        }
-        return listSchedule.stream().filter(emp-> emp.getId().longValue() == empId).collect(Collectors.toList());
+    public List<Schedule> getScheduleByEmployee(Employee employee) {
+        return employee.getListSchedule();
     }
+
 
      public List<Schedule> getScheduleByCustomer(Customer customer) {
         List<Schedule> customerSchedules = customer.getListPets()
@@ -67,6 +59,19 @@ public class ScheduleService {
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
         return customerSchedules;
+    }
+
+
+    public List<Schedule> getScheduleByEmployeeId(Long empId){
+        return scheduleRepository.getScheduleByEmployeeId(empId);
+    }
+
+    public List<Schedule> getScheduleByPetId(Long petId){
+        return scheduleRepository.getScheduleByPetId(petId);
+    }
+
+    public List<Schedule> getScheduleByCustomerId(Long cusId){
+        return  scheduleRepository.getScheduleByCustomerId(cusId);
     }
 
 }

@@ -51,30 +51,33 @@ public class ScheduleController {
 
     @GetMapping("/pet/{petId}")
     public List<ScheduleDTO> getScheduleForPet(@PathVariable long petId) {
-        Pet pet = petService.getPetById(petId);
-        return getListScheduleDTO(scheduleService.getScheduleByPet(pet));
+//        Pet pet = petService.getPetById(petId);
+//        return getListScheduleDTO(pet.getListSchedule());
+        return getListScheduleDTO(scheduleService.getScheduleByPetId(petId));
     }
 
     @GetMapping("/employee/{employeeId}")
     public List<ScheduleDTO> getScheduleForEmployee(@PathVariable long employeeId) {
-        //Employee emp = employeeService.getEmpById(employeeId);
+//        Employee emp = employeeService.getEmpById(employeeId);
+//        return  getListScheduleDTO(emp.getListSchedule());
         return getListScheduleDTO(scheduleService.getScheduleByEmployeeId(employeeId));
-//        List<Schedule> schedules = scheduleService.getAllSchedulesForEmployee(employeeId);
-//        return schedules.stream().map(this::getScheduleDTO).collect(Collectors.toList());
     }
 
     @GetMapping("/customer/{customerId}")
     public List<ScheduleDTO> getScheduleForCustomer(@PathVariable long customerId) {
-        Customer customer = customerService.getCustomerById(customerId);
-        return getListScheduleDTO(scheduleService.getScheduleByCustomer(customer));
+//        Customer customer = customerService.getCustomerById(customerId);
+//        return getListScheduleDTO(scheduleService.getScheduleByCustomer(customer));
+        return getListScheduleDTO(scheduleService.getScheduleByCustomerId(customerId));
     }
 
     private ScheduleDTO getScheduleDTO(Schedule schedule) {
         ScheduleDTO scheduleDTO = new ScheduleDTO();
-        // use BeanUtil copy properties
-        //BeanUtils.copyProperties(schedule, scheduleDTO);
-        //schedule.getListEmp().forEach(employee -> {scheduleDTO.getEmployeeIds().add(employee.getId());});
-        //schedule.getListPet().forEach(pet -> {scheduleDTO.getPetIds().add(pet.getId());});
+//         use BeanUtil copy properties
+//        BeanUtils.copyProperties(schedule, scheduleDTO);
+//        schedule.getListEmp().forEach(employee -> {scheduleDTO.getEmployeeIds().add(employee.getId());});
+//        schedule.getListPet().forEach(pet -> {scheduleDTO.getPetIds().add(pet.getId());});
+//        schedule.getListEmp().forEach(employee -> {scheduleDTO.getEmployeeIds().add(employee.getId());});
+//        schedule.getListPet().forEach(pet -> {scheduleDTO.getPetIds().add(pet.getId());});
         scheduleDTO.setId(schedule.getId());
         scheduleDTO.setEmployeeIds(schedule.getListEmp().stream().map(Employee::getId).collect(Collectors.toList()));
         scheduleDTO.setPetIds(schedule.getListPet().stream().map(Pet::getId).collect(Collectors.toList()));
